@@ -20,12 +20,14 @@ class TournamentListComponent extends React.Component {
         <h2 className='text-center'>Current Tournaments</h2>
         <ul className='list-group'>
           {this.state.tournaments &&
-            this.state.tournaments.map(tournament => (
-              <TournamentListItemComponent
-                key={tournament._id}
-                tournament={tournament}
-              />
-            ))}
+            this.state.tournaments
+              .sort((a, b) => a.startTime < b.startTime)
+              .map(tournament => (
+                <TournamentListItemComponent
+                  key={tournament._id}
+                  tournament={tournament}
+                />
+              ))}
         </ul>
       </div>
     );

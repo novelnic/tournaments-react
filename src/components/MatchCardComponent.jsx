@@ -1,4 +1,6 @@
 import React from 'react';
+import { ReactComponent as Podium } from '../icons/rank.svg';
+import { ReactComponent as Skull } from '../icons/bone.svg';
 import { Card, Row } from 'react-bootstrap';
 import MatchService from '../services/MatchService';
 import computeScore from '../utils/score';
@@ -23,25 +25,45 @@ class MatchCardComponent extends React.Component {
     let totKills =
       players && players.reduce((acc, player) => (acc += player.kills), 0);
     return (
-      <Card bg='secondary'>
-        <Card.Header className='d-flex justify-content-between align-items-center'>
-          <h6>{computeScore([this.state.match])} points</h6>
-          <h6>{totKills} Kills</h6>
-          <h6>Placement: {this.state.match && this.state.match.placement}</h6>
+      <Card className={'m-1'} bg='secondary'>
+        <Card.Header>
+          <Row className='align-items-center'>
+            <h5 className={'m-auto align-text-middle'}>
+              {computeScore([this.state.match])} points
+            </h5>
+            <h6 className={'my-auto mr-2'}>
+              {totKills} <Skull style={{ height: '1.5em', width: 'auto' }} />
+            </h6>
+            <h6 className={'my-auto'}>
+              {this.state.match && this.state.match.placement}
+              <Podium
+                className={'ml-1'}
+                style={{ height: '1.5em', width: 'auto' }}
+              />
+            </h6>
+          </Row>
         </Card.Header>
         <Card.Body>
           {players &&
-            players.map(player => {
-              return (
-                <Row
-                  key={player.username}
-                  className='justify-content-between align-items-center'
-                >
-                  <h6>{player.username}</h6>
-                  <h6>{player.kills} Kills</h6>
-                </Row>
-              );
-            })}
+            players
+              .sort((a, b) => b.kills - a.kills)
+              .map(player => {
+                return (
+                  <Row
+                    key={player.username}
+                    className='justify-content-between align-items-center'
+                  >
+                    <h6>{player.username}</h6>
+                    <h6>
+                      {player.kills}
+                      <Skull
+                        className={'ml-1'}
+                        style={{ height: '1em', width: 'auto' }}
+                      />
+                    </h6>
+                  </Row>
+                );
+              })}
         </Card.Body>
       </Card>
     );

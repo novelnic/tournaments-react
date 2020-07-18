@@ -39,7 +39,7 @@ class TournamentDetailComponent extends React.Component {
         <div className='container'>
           <h1 className={'text-center'}>{this.state.tournament.name}</h1>
           {this.state.teams
-            .sort((a, b) => b - a)
+            .sort((a, b) => b.score - a.score)
             .map(team => (
               <TeamCardComponent key={team._id} team={team} />
             ))}

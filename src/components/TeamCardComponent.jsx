@@ -8,13 +8,13 @@ class TeamCardComponent extends React.Component {
       <Accordion>
         <Card bg='dark'>
           <Accordion.Toggle as={Card.Header} eventKey='0'>
-            <Row className='align-items-center justify-content-between'>
+            <Row className='align-items-center justify-content-between mx-auto'>
               <h5>{team.name}</h5>
               <h5>Score: {team.score}</h5>
             </Row>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey='0'>
-            <Card.Body>
+            <Card.Body className={'card-deck cols-sm-1'}>
               {team.matches.map(matchId => (
                 <MatchCardComponent key={matchId} matchId={matchId} />
               ))}
