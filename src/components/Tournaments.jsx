@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, HashRouter } from 'react-router-dom';
 import HomePageComponent from './HomePageComponent';
 import TournamentDetailComponent from './TournamentDetailComponent';
 
 class Tournaments extends React.Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div>
           <Route path='/' exact={true} component={HomePageComponent} />
           <Route
@@ -15,7 +15,7 @@ class Tournaments extends React.Component {
             component={TournamentDetailComponent}
           />
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
