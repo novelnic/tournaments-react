@@ -9,15 +9,8 @@ class MatchCardComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      match: {},
+      match: this.props.match,
     };
-  }
-
-  componentDidMount() {
-    let matchId = this.props.matchId;
-    MatchService.getMatch(matchId).then(({ data: match }) => {
-      this.setState({ match });
-    });
   }
 
   render() {
