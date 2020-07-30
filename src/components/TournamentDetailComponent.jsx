@@ -19,7 +19,7 @@ class TournamentDetailComponent extends React.Component {
       TeamService.findTeamsByTournament(tourn._id).then(
         async ({ data: teams }) => {
           teams = await Promise.all(
-            teams.map(async team => {
+            teams.map(async (team) => {
               return await TeamService.getTeamScore(team._id).then(
                 ({ data: score }) => {
                   return { ...team, score };
@@ -35,12 +35,12 @@ class TournamentDetailComponent extends React.Component {
   render() {
     return (
       <div>
-        <NavbarComponent />
+        <NavbarComponent scoring={true} />
         <div className='container'>
           <h1 className={'text-center'}>{this.state.tournament.name}</h1>
           {this.state.teams
             .sort((a, b) => b.score - a.score)
-            .map(team => (
+            .map((team) => (
               <TeamCardComponent key={team._id} team={team} />
             ))}
         </div>

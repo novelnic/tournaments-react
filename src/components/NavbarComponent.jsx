@@ -6,8 +6,13 @@ class NavbarComponent extends React.Component {
     return (
       <nav className='navbar navbar-dark bg-dark'>
         <Link className='navbar-brand' to='/'>
-          Jup Null Tournaments
+          Live Tournaments
         </Link>
+        {this.props.scoring && this.props.scoring == true && (
+          <Link to='/scoring' className='btn btn-primary'>
+            Scoring
+          </Link>
+        )}
       </nav>
     );
   }
