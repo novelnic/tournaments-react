@@ -1,0 +1,18 @@
+.match-card .match-card-header .svg {
+    height: 1.5em;
+    width: auto;
+}
+
+.match-card .match-card-header .kills-text {
+    margin-right: .2em !important;
+    padding-top: .2em;
+}
+
+.match-card .match-card-header .placement-text {
+    padding-top: .2em;
+}
+
+.match-card .match-card-body .svg {
+    height: 1em;
+    width: auto;
+}
