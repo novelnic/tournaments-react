@@ -1,4 +1,5 @@
 import axios from 'axios';
+import io from 'socket.io-client';
 
 axios.defaults.baseURL = '';
 
@@ -8,4 +9,17 @@ export default {
   deleteTournament: id => axios.delete('/api/tournaments/' + id),
   saveTournament: tournamentData =>
     axios.post('/api/tournaments', tournamentData),
+  updateScores: (id, socket, callback) => {
+    socket.on('scores', (data) => {
+      callback(data);
+    })
+  },
+  connectToSocket: () => {
+    const socket = io();
+    socket.emit('scores', {tournamentId: id});
+    return socket;
+  },
+  disconnectFromSocket: (socket) => {
+    socket.disconnect();
+  }
 };

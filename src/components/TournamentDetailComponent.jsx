@@ -15,6 +15,7 @@ class TournamentDetailComponent extends React.Component {
 
   componentDidMount() {
     let tId = this.props.match.params.tournamentId;
+    let socket = TournamentService.connectToSocket();
     TournamentService.getTournament(tId).then(({ data: tourn }) => {
       TeamService.findTeamsByTournament(tourn._id).then(
         async ({ data: teams }) => {
@@ -27,11 +28,25 @@ class TournamentDetailComponent extends React.Component {
               );
             })
           );
-          this.setState({ tournament: tourn, teams: teams });
+          this.setState({ socket, tournament: tourn, teams: teams });
         }
       );
     });
+
+    TournamentService.updateScores(tId, socket, this.onTournamentUpdate)
+  };
+
+  componentWillUnmount() {
+      const {socket} = this.state;
+      TournamentService.disconnectFromSocket(socket);
   }
+
+    onTournamentUpdate = (data) => {
+    console.log("in component " + data)
+  };
+
+
+
   render() {
     return (
       <div>
