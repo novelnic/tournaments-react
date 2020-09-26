@@ -16,6 +16,7 @@ class TournamentDetailComponent extends React.Component {
   componentDidMount() {
     let tId = this.props.match.params.tournamentId;
     let socket = TournamentService.connectToSocket(tId);
+    console.log(socket);
     TournamentService.getTournament(tId).then(({ data: tourn }) => {
       TeamService.findTeamsByTournament(tourn._id).then(
         async ({ data: teams }) => {

@@ -15,7 +15,8 @@ export default {
     });
   },
   connectToSocket: (id) => {
-    const socket = io();
+    const socket = io().connect();
+    console.log('connecting to socket');
     socket.emit('scores', { tournamentId: id });
     return socket;
   },
