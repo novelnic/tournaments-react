@@ -15,7 +15,7 @@ export default {
     });
   },
   connectToSocket: (id) => {
-    const socket = io().connect();
+    const socket = io({ reconnectionAttempts: 20 }).connect();
     console.log('connecting to socket');
     socket.emit('scores', { tournamentId: id });
     return socket;
